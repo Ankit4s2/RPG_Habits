@@ -24,7 +24,7 @@ const xpToNextLevel = (level) => Math.floor(50 * Math.pow(level, 1.5));
  * Does NOT save to DB — caller is responsible for that, so it can be
  * combined with other updates in one write.
  */
-function applyQuestCompletion(user, difficulty) {
+export const applyQuestCompletion = (user, difficulty)=>{
   const reward = DIFFICULTY_REWARDS[difficulty] || DIFFICULTY_REWARDS.medium;
 
   // Streak multiplier: every 5-day streak adds +10% XP, capped at +50%
@@ -53,7 +53,7 @@ function applyQuestCompletion(user, difficulty) {
  * Returns whether the character "died" (hp hit 0) — you can decide
  * what that means in-game (e.g. lose streak, lose gold, respawn at lvl-appropriate HP).
  */
-function applyMissedQuestPenalty(user, difficulty) {
+export const applyMissedQuestPenalty = (user, difficulty)=>{
   const penalties = { easy: 5, medium: 10, hard: 15, epic: 25 };
   const damage = penalties[difficulty] || 10;
 
@@ -69,10 +69,8 @@ function applyMissedQuestPenalty(user, difficulty) {
   return { damage, died };
 }
 
-module.exports = {
+export const gameLogic =  {
   DIFFICULTY_REWARDS,
   getMaxHP,
   xpToNextLevel,
-  applyQuestCompletion,
-  applyMissedQuestPenalty,
 };

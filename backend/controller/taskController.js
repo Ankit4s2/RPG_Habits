@@ -1,4 +1,8 @@
 import Task from "../model/Task.js";
+import {
+    applyQuestCompletion,
+    applyMissedQuestPenalty
+} from "../utils/gameLogic.js";
 
 export const getTask = async (req, res)=>{
 
